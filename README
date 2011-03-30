@@ -29,6 +29,14 @@ CSV_EXPORTER_CSV_FIELDS = {
     },
 }
 
+urls.py
+
+# CSV EXPORTER
+urlpatterns += patterns('csvexporter.views',
+    url(r'^csvexporter/user/filter/$', 'csv_filter', kwargs={"model": User}, name='csvexporter_filter'),
+)
+
+
 csvexporter_helper.py
 
 def user_csv_field_value(item):
