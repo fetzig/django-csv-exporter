@@ -1,0 +1,40 @@
+
+settings.py
+
+CSV_EXPORTER_FILTER_DEFINITION = {
+    "user": {
+        'username': [
+            'contains',
+            'exact',
+        ],
+        'email': [
+            'contains',
+            'exact',
+        ],
+        'userprofile_user': {
+            'place_address': [
+                'contains',
+                'exact',
+            ],
+        }
+    },
+}
+
+from csvexporter_helper import user_csv_field_value
+
+CSV_EXPORTER_CSV_FIELDS = {
+    "user" : {
+        "field_names": ["name", "email", "adress"],
+        "field_value_function": user_csv_field_value,
+    },
+}
+
+csvexporter_helper.py
+
+def user_csv_field_value(item):
+    result = [
+        item.username, # name
+        item.email, # email
+        item.userprofile_user.all()[0].place_address, # adress
+    ]
+    return result

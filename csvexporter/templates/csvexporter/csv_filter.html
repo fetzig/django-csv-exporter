@@ -1,0 +1,52 @@
+{% extends "csvexporter/base.html" %}
+
+{% load i18n %}
+
+
+{% block content_title %}<h1>CSV Export Filter</h1>{% endblock %}
+
+
+{% block content %}
+<div id="changelist" class="container-full">
+    <form action="" method="POST" accept-charset="utf-8">
+        <div>
+            {{ form.as_p }}
+        </div>
+        
+        <div class="module changelist-results">
+            {% if object_list %}
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            {% for item in object_list_header %}
+                                <th>{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr class="row1">
+                                {% for item in object %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="row">
+                    <div class="cell">
+                        no results
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="module footer"> 
+            <ul class="submit-row">
+                <li class="submit-button-container"><input type="submit" value="{% trans 'Export' %}" class="default" name="export" /></li>
+                <li class="submit-button-container"><input type="submit" value="{% trans 'Filter' %}" class="default" name="save" /></li>
+            </ul><br clear="all" />
+        </div>
+    </form>
+</div>
+{% endblock %}
